@@ -40,7 +40,18 @@ end
 -- if a ∣ b and b ∣ c, then a ∣ c.
 theorem divides_trans : ∀ (a b c : ℤ), a ∣ b ∧ b ∣ c → a ∣ c :=
 begin
-sorry
+intros a b c H,
+cases H with Hl Hr,
+unfold divides,
+unfold divides at Hl Hr,
+cases Hl with n Summer_sez,
+cases Hr with m Thomas_sez,
+existsi(n * m :ℤ),
+symmetry,
+calc c
+= b * m : by rw Thomas_sez ...
+= (a * n) * m : by rw Summer_sez ...
+= a * (n * m) : by ac_refl,
 end
 -- Proof: Let a,b,c ∈ ℤ be arbitrary and assume that 
 -- a ∣ b and b ∣ c. We must show that a ∣ c; i.e., we
